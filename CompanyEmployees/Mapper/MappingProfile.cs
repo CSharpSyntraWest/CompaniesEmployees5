@@ -17,6 +17,8 @@ namespace CompanyEmployees.Mapper
                             c => c.MapFrom(c => c.Address + " " + c.Country));
 
             CreateMap<Employee, EmployeeDto>();
+            CreateMap<CompanyForCreationDto, Company>();//p82
+            CreateMap<EmployeeForCreationDto, Employee>();//86
         }
     }
 }

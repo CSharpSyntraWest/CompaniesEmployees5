@@ -63,5 +63,23 @@ namespace CompanyEmployees.Controllers
             _repositoryManager.Save();
             return NoContent();
         }
+        [HttpPost]
+        public IActionResult CreateEmployeeForCompany(Guid companyId,
+            [FromBody] EmployeeForCreationDto employeeDto)
+        {
+            if (employeeDto == null)
+            {
+                return BadRequest("employeeDto object is null");
+            }
+            var company = _repositoryManager.Company.GetCompany(companyId,false);
+            if (company == null)
+            {
+                return NotFound();
+            }
+            var employee = _mapper.Map<Employee>(employeeDto);
+            _repositoryManager.Employee.CreateEmployeeForCompany(companyId, employee);
+            _repositoryManager.Save();
+            return Ok(employee);
+        }
     }
 }

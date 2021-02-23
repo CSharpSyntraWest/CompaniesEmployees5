@@ -64,12 +64,23 @@ namespace CompanyEmployees.Controllers
             return NoContent();
         }
         [HttpPost]
-        public IActionResult CreateCompany([FromBody] Company company)
+        public IActionResult CreateCompany([FromBody] CompanyForCreationDto companyDto)
         {
-            if (company == null)
+            if (companyDto == null)
             {
-                BadRequest("Company object is empty");
+                BadRequest("CompanyDto object is empty");
             }
+            //To do: het companyDto object omzetten naar een company object
+            //2 manieren mogelijk
+            //1) Ofwel manueel code schrijven:
+            //Company company = new Company()
+            //{
+            //    Name = companyDto.Name,
+            //    Address = companyDto.Address,
+            //    Country = companyDto.Country
+            //};
+            //2) Ofwel Automapper
+            Company company = _mapper.Map<Company>(companyDto);
             _repositoryManager.Company.CreateCompany(company);
             _repositoryManager.Save();
             return Ok(company);    //200 met data van nieuw gecreëerde company
