@@ -85,5 +85,25 @@ namespace CompanyEmployees.Controllers
             _repositoryManager.Save();
             return Ok(company);    //200 met data van nieuw gecreëerde company
         }
+        [HttpPut("{companyId}")]
+        public IActionResult UpdateCompany(Guid companyId, [FromBody] CompanyForUpdateDto companyDto)
+        {
+            if (companyDto == null)
+            {
+                 return BadRequest("CompanyForUpdateDto object is null");
+            }
+            var companyEntity = _repositoryManager.Company.GetCompany(companyId,
+                trackChanges: true);
+            if (companyEntity == null)
+            {
+                return NotFound();
+            }
+            companyEntity.Name = companyDto.Name;
+            companyEntity.Address = companyDto.Address;
+            companyEntity.Country = companyDto.Country;
+            //_mapper.Map(companyDto, companyEntity);
+            _repositoryManager.Save();
+            return Ok(companyEntity);
+        }
     }
 }
