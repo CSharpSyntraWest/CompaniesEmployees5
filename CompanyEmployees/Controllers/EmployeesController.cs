@@ -71,7 +71,7 @@ namespace CompanyEmployees.Controllers
             {
                 return BadRequest("employeeDto object is null");
             }
-            var company = _repositoryManager.Company.GetCompany(companyId,false);
+            var company = _repositoryManager.Company.GetCompany(companyId, false);
             if (company == null)
             {
                 return NotFound();
@@ -81,5 +81,25 @@ namespace CompanyEmployees.Controllers
             _repositoryManager.Save();
             return Ok(employee);
         }
+        [HttpPut("{employeeId}")]
+        public IActionResult UpdateEmployee(Guid employeeId, [FromBody] EmployeeForUpdateDto employeeDto)
+        {
+            if (employeeDto == null)
+            {
+                BadRequest("EmployeeForUpdateDto is empty");
+            }
+            var employee = _repositoryManager.Employee.GetEmployee(employeeId, false);
+            if (employee == null)
+            {
+                NotFound(); //404
+            }
+            employee.Name = employeeDto.Name;
+            employee.Age = employeeDto.Age;
+            employee.Position = employeeDto.Position;
+            //ofwel met automapper: _mapper.Map(employeeDto, employee);//eerst aan MappingProfile toevoegen: CreateMap<EmployeeForUpdateDto, Employee>();//101
+            _repositoryManager.Save();
+            return Ok(employee);
+        }
     }
+    
 }
