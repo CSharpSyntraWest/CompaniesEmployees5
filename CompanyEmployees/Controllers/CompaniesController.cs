@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Contracts;
 using Entities.DataTransferObjects;
+using Entities.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -61,6 +62,17 @@ namespace CompanyEmployees.Controllers
             _repositoryManager.Company.DeleteCompany(company);
             _repositoryManager.Save();
             return NoContent();
+        }
+        [HttpPost]
+        public IActionResult CreateCompany([FromBody] Company company)
+        {
+            if (company == null)
+            {
+                BadRequest("Company object is empty");
+            }
+            _repositoryManager.Company.CreateCompany(company);
+            _repositoryManager.Save();
+            return Ok(company);    //200 met data van nieuw gecreëerde company
         }
     }
 }

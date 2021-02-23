@@ -10,5 +10,7 @@ namespace Contracts
         IEnumerable<Company> GetAllCompanies(bool trackChanges);
         Company GetCompany(Guid companyId, bool trackChanges);
         void DeleteCompany(Company company);
+        void CreateCompany(Company company);
+
     }
 }
