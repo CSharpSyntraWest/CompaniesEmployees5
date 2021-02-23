@@ -88,7 +88,7 @@ namespace CompanyEmployees.Controllers
             {
                 BadRequest("EmployeeForUpdateDto is empty");
             }
-            var employee = _repositoryManager.Employee.GetEmployee(employeeId, false);
+            var employee = _repositoryManager.Employee.GetEmployee(employeeId, true);
             if (employee == null)
             {
                 NotFound(); //404
@@ -96,7 +96,8 @@ namespace CompanyEmployees.Controllers
             employee.Name = employeeDto.Name;
             employee.Age = employeeDto.Age;
             employee.Position = employeeDto.Position;
-            //ofwel met automapper: _mapper.Map(employeeDto, employee);//eerst aan MappingProfile toevoegen: CreateMap<EmployeeForUpdateDto, Employee>();//101
+            //ofwel met automapper://eerst aan MappingProfile toevoegen: CreateMap<EmployeeForUpdateDto, Employee>();//101
+            // _mapper.Map(employeeDto, employee);
             _repositoryManager.Save();
             return Ok(employee);
         }
