@@ -40,11 +40,11 @@
                         <input type="number" id="age" min="18" max="67" />
                     </td>
                     <!--<td>
-                    <label for="birthday">Birthday:</label>
-                </td>
-                <td>
-                    <input type="date" id="birthday" name="birthday">
-                </td>-->
+            <label for="birthday">Birthday:</label>
+        </td>
+        <td>
+            <input type="date" id="birthday" name="birthday">
+        </td>-->
                 </tr>
                 <tr>
                     <td>
@@ -60,7 +60,7 @@
                         <label for="phone">Enter your gsm number:</label>
                     </td>
                     <td>
-                        <input type="tel" id="phone" pattern="0[0-9]{3}/[0-9]{2}.[0-9]{2}.[0-9]{2}"/>
+                        <input type="tel" id="phone" pattern="0[0-9]{3}/[0-9]{2}.[0-9]{2}.[0-9]{2}" />
                     </td>
                 </tr>
                 <tr>
@@ -83,7 +83,26 @@
                         <label for="vehicle3"> I have a boat</label>
                     </td>
                 </tr>
-
+                <tr>
+                    <td><label for="countries">Choose your country:</label></td>
+                    <td>
+                        <select id="countries">
+                            <option value="BE">Belgium</option>
+                            <option value="NL">Netherlands</option>
+                            <option value="UK">United Kingdom</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="favoriteMeals">Favorite meal(s):</label></td>
+                    <td>
+                        <select id="favoriteMeals" size="3" multiple>
+                            <option value="P">Pizza</option>
+                            <option value="S">Spaghetti</option>
+                            <option value="H">Hamburger</option>
+                        </select>
+                    </td>
+                </tr>
                 <tr>
                     <td colspan="2">
                         <input type="submit" value="Stuur" />
