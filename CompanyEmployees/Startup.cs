@@ -37,7 +37,7 @@ namespace CompanyEmployees
         {
             services.AddDbContext<RepositoryContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("sqlConnection"),
                  b => b.MigrationsAssembly("CompanyEmployees")));
-            services.AddScoped<ILoggerManager, LoggerManager>(); // nieuw object per HTTP request
+           // services.AddScoped<ILoggerManager, LoggerManager>(); // nieuw object per HTTP request
             services.AddScoped<IRepositoryManager, RepositoryManager>();
             //services.AddSingleton<ILoggerManager, LoggerManager>(); 
             //1 keer bij opstarten van Web APi een object maken, die wordt gebruikt zolang de web app runt
