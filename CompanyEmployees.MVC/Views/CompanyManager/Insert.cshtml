@@ -10,7 +10,7 @@
                 <label asp-for="Name"></label>:
             </td>
             <td>
-                <input type="text" asp-for="Name"/>
+                <input type="text" asp-for="Name" />
                 <span asp-validation-for="Name" class="message"></span>
             </td>
         </tr>
@@ -19,7 +19,7 @@
                 <label asp-for="Address"></label>:
             </td>
             <td>
-                <input type="text" asp-for="Address"/>
+                <input type="text" asp-for="Address" />
                 <span asp-validation-for="Address" class="message"></span>
             </td>
         </tr>
@@ -30,6 +30,11 @@
             <td>
                 <input type="text" asp-for="Country" />
                 <span asp-validation-for="Country" class="message"></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="submit">Save</button>
             </td>
         </tr>
     </table>
