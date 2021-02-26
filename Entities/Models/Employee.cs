@@ -10,10 +10,11 @@ namespace Entities.Models
     {
         [Column("EmployeeId")]
         public Guid Id { get; set; }
-        [Required(ErrorMessage = "Employee name is a required field.")]
-        [MaxLength(30, ErrorMessage = "Maximum length for the Name is 30 characters.")]
+        [Required(ErrorMessage = "De naam van de werknemer is verplicht.")]
+        [MaxLength(30, ErrorMessage = "De maximale lengte van de naam is 30.")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Age is a required field.")]
+        [Required]
+        [Range(18,67,ErrorMessage ="Leeftijd moet tussen 18 en 67 zijn")]
         public int Age { get; set; }
         [Required(ErrorMessage = "Position is a required field.")]
         [MaxLength(20, ErrorMessage = "Maximum length for the Position is 20 characters.")]
