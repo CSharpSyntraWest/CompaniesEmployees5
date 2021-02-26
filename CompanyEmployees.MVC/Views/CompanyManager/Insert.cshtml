@@ -1,0 +1,40 @@
+﻿@model Entities.Models.Company
+
+<h2>Insert new company</h2>
+<h3 class="message">@ViewBag.Message</h3>
+
+<form asp-controller="CompanyManager" asp-action="Insert" method="post">
+    <table>
+        <tr>
+            <td class="right">
+                <label asp-for="Name"></label>:
+            </td>
+            <td>
+                <input type="text" asp-for="Name"/>
+                <span asp-validation-for="Name" class="message"></span>
+            </td>
+        </tr>
+        <tr>
+            <td class="right">
+                <label asp-for="Address"></label>:
+            </td>
+            <td>
+                <input type="text" asp-for="Address"/>
+                <span asp-validation-for="Address" class="message"></span>
+            </td>
+        </tr>
+        <tr>
+            <td class="right">
+                <label asp-for="Country"></label>:
+            </td>
+            <td>
+                <input type="text" asp-for="Country" />
+                <span asp-validation-for="Country" class="message"></span>
+            </td>
+        </tr>
+    </table>
+</form>
+<br />
+<br />
+<a asp-controller="CompanyManager" asp-action="Index">Back to Company Lising</a>
+
