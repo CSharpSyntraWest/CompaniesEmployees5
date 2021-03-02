@@ -1,8 +1,10 @@
+using CompanyEmployees.MVC.Security;
 using Contracts;
 using Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +30,14 @@ namespace CompanyEmployees.MVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<RepositoryContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("sqlConnection")));
+            services.AddDbContext<SecurityDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("securityConnection")));
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<SecurityDbContext>();
+            services.ConfigureApplicationCookie(opt =>
+            {
+                opt.LoginPath = "/Security/SignIn";
+                opt.AccessDeniedPath = "/Security/AccessDenied";
+            });
+
             services.AddScoped<IRepositoryManager, RepositoryManager>();
             services.AddControllersWithViews();
         }
@@ -49,7 +59,7 @@ namespace CompanyEmployees.MVC
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
