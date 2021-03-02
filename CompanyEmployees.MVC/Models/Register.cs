@@ -9,20 +9,20 @@ namespace CompanyEmployees.MVC.Models
     public class Register
     {
         [Required]
-        [Display(Name = "User Name")]
+        [Display(Name = "GebruikersNaam")]
         public string UserName { get; set; }
 
         [Required]
-        [Display(Name = "Password")]
+        [Display(Name = "Wachtwoord")]
         public string Password { get; set; }
 
         [Required]
         [Compare("Password")]
-        [Display(Name = "Confirm Password")]
+        [Display(Name = "Confirmatie wachtwoord")]
         public string ConfirmPassword { get; set; }
 
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "E-mail")]
         [EmailAddress]
         public string Email { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿@model Register
 
-<h2>Create New User Account</h2>
+<h2>Nieuwe gebruikersaccount aanmaken</h2>
 <form asp-controller="Security" asp-action="Register" method="post">
     <table>
         <tr>
@@ -21,12 +21,13 @@
         </tr>
         <tr>
             <td colspan="2">
-                <button type="submit">Create</button>
+                <button type="submit">Aanmaken</button>
             </td>
         </tr>
     </table>
     <div asp-validation-summary="All" class="message"></div>
 
-    <h3><a asp-controller="Security" asp-action="SignIn">Go To Sign-In Page</a></h3>
+    <h3><a asp-controller="Security" asp-action="SignIn">Ga naar login pagina</a></h3>
 
 </form>
+

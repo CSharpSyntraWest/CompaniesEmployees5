@@ -9,15 +9,15 @@ namespace CompanyEmployees.MVC.Models
     public class SignIn
     {
         [Required]
-        [Display(Name = "User Name")]
+        [Display(Name = "Gebruikersnaam")]
         public string UserName { get; set; }
 
         [Required]
-        [Display(Name = "Password")]
+        [Display(Name = "Wachtwoord")]
         public string Password { get; set; }
 
         [Required]
-        [Display(Name = "Remember Me")]
+        [Display(Name = "Onthoud mij")]
         public bool RememberMe { get; set; }
 
     }
