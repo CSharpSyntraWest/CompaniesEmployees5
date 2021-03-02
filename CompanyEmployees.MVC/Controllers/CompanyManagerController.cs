@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Entities.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -9,15 +10,17 @@ using System.Threading.Tasks;
 
 namespace CompanyEmployees.MVC.Controllers
 {
+    [Authorize(Roles="Visitor,Manager")]
     public class CompanyManagerController : Controller
     {
-
+        
         private IRepositoryManager _repositoryManager;
 
         public CompanyManagerController(IRepositoryManager repositoryManager)
         {
             _repositoryManager = repositoryManager;
         }
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var companies = _repositoryManager.Company.GetAllCompanies(false);
