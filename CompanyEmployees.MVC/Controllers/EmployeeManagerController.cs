@@ -46,5 +46,55 @@ namespace CompanyEmployees.MVC.Controllers
             FillCompanies();
             return View(model);
         }
+
+        public IActionResult Update(Guid id)
+        {
+            FillCompanies();
+
+            Employee model = _repositoryManager.Employee.GetEmployee(id, false);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Update(Employee model)
+        {
+            FillCompanies();
+
+            if (ModelState.IsValid)
+            {
+                Employee employeeToUpdate = _repositoryManager.Employee.GetEmployee(model.Id, true);
+                employeeToUpdate.Name = model.Name;
+                employeeToUpdate.Position = model.Position;
+                employeeToUpdate.Age = model.Age;
+                employeeToUpdate.CompanyId = model.CompanyId;
+                _repositoryManager.Save();
+                ViewBag.Message = "Employee updated successfully";
+            }
+            return View(model);
+        }
+
+        [ActionName("Delete")]
+        public IActionResult ConfirmDelete(Guid id)
+        {
+            Employee model = _repositoryManager.Employee.GetEmployee(id, false);
+            Company company = _repositoryManager.Company.GetCompany(model.CompanyId, false);
+            ViewBag.Company = company;
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(Guid id)
+        {
+            Employee employeeToDelete = _repositoryManager.Employee.GetEmployee(id, false);
+            _repositoryManager.Employee.DeleteEmployee(employeeToDelete);
+            _repositoryManager.Save();
+            TempData["Message"] = "Employee deleted successfully";
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
