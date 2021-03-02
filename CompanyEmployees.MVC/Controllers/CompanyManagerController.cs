@@ -70,12 +70,22 @@ namespace CompanyEmployees.MVC.Controllers
                                               select new SelectListItem() { Text = c.Name, Value = c.Id.ToString() }).ToList();
             ViewBag.Employees = employees;
         }
+
         [ActionName("Delete")]
         public IActionResult ConfirmDelete(Guid id)
         {
-            Company company = _repositoryManager.Company.GetCompany(id, false);
-            FillEmployeesForCompany(id);
-            return View(company);
+            //int aantalEmployees = _repositoryManager.Employee.GetAllEmployees(false).Where(e => e.CompanyId == id).Count();
+            //if (aantalEmployees > 0)
+            //{
+            //    ViewBag.Message = "Cannot remove Company, " + aantalEmployees + " employee(s) work here";
+            //    return View(new Company());
+            //}
+            //else {
+                ViewBag.Message = "Warning : You are about to delete this company";
+                Company company = _repositoryManager.Company.GetCompany(id, false);
+                FillEmployeesForCompany(id);
+                return View(company);
+           // }
         }
 
 
@@ -83,12 +93,21 @@ namespace CompanyEmployees.MVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Delete(Guid id)
         {
-            Company companyToDelete = _repositoryManager.Company.GetCompany(id, false);
-            _repositoryManager.Company.DeleteCompany(companyToDelete);
-            _repositoryManager.Save();
+            //int aantalEmployees = _repositoryManager.Employee.GetAllEmployees(false).Where(e => e.CompanyId == id).Count();
+            //if (aantalEmployees > 0)
+            //{
+            //    ViewBag.Message = "Cannot remove Company, " + aantalEmployees + " employee(s) work here";
+            //    return View(new Company());
+            //}
+            //else
+            //{
+                Company companyToDelete = _repositoryManager.Company.GetCompany(id, false);
+                _repositoryManager.Company.DeleteCompany(companyToDelete);
+                _repositoryManager.Save();
 
-            TempData["Message"] = "Company deleted successfully";
-            return RedirectToAction(nameof(Index));
+                TempData["Message"] = "Company deleted successfully";
+                return RedirectToAction(nameof(Index));
+            //}
         }
     }
 }

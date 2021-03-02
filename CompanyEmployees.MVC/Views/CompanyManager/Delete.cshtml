@@ -3,68 +3,69 @@
 <h2>Delete Existing Company</h2>
 
 <h3 class="message">
-    Warning : You are about to delete company with the employees!
+    @ViewBag.Message
 </h3>
+@if (!String.IsNullOrEmpty(Model.Name))
+{
+    <form asp-controller="CompanyManager" asp-action="Delete" method="post">
 
-<form asp-controller="CompanyManager" asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
 
-    <input type="hidden" asp-for="Id" />
+        <table border="0">
+            <tr>
+                <td class="right">
+                    <label asp-for="Id"></label> :
+                </td>
+                <td>
+                    @Model.Id
+                </td>
+            </tr>
+            <tr>
+                <td class="right">
+                    <label asp-for="Name"></label> :
+                </td>
+                <td>
+                    @Model.Name
+                </td>
+            </tr>
+            <tr>
+                <td class="right">
+                    <label asp-for="Address"></label> :
+                </td>
+                <td>
+                    @Model.Address
+                </td>
+            </tr>
+            <tr>
+                <td class="right">
+                    <label asp-for="Country"></label> :
+                </td>
+                <td>
+                    @Model.Country
+                </td>
+            </tr>
+            <tr>
+                <td class="right">
+                    <label asp-for="Employees"></label>:
+                </td>
+                <td>
+                    <select asp-for="Employees" asp-items="@ViewBag.Employees" size="5">
+                        <option value="">--Employees--</option>
+                    </select>
+                    <span asp-validation-for="Employees" class="message"></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="submit">Delete</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+}
+    <br />
+    <br />
 
-    <table border="0">
-        <tr>
-            <td class="right">
-                <label asp-for="Id"></label> :
-            </td>
-            <td>
-                @Model.Id
-            </td>
-        </tr>
-        <tr>
-            <td class="right">
-                <label asp-for="Name"></label> :
-            </td>
-            <td>
-                @Model.Name
-            </td>
-        </tr>
-        <tr>
-            <td class="right">
-                <label asp-for="Address"></label> :
-            </td>
-            <td>
-                @Model.Address
-            </td>
-        </tr>
-        <tr>
-            <td class="right">
-                <label asp-for="Country"></label> :
-            </td>
-            <td>
-                @Model.Country
-            </td>
-        </tr>
-        <tr>
-            <td class="right">
-                <label asp-for="Employees"></label>:
-            </td>
-            <td>
-                <select asp-for="Employees" asp-items="@ViewBag.Employees" size="5">
-                    <option value="">--Employees--</option>
-                </select>
-                <span asp-validation-for="Employees" class="message"></span>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <button type="submit">Delete</button>
-            </td>
-        </tr>
-    </table>
-</form>
-
-<br />
-<br />
-
-<a asp-controller="CompanyManager" asp-action="Index">Back to Company Listing</a>
+    <a asp-controller="CompanyManager" asp-action="Index">Back to Company Listing</a>
 
 
