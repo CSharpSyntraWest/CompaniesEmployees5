@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Entities.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace CompanyEmployees.MVC.Controllers
 {
+    [Authorize(Roles="Manager")]
     public class EmployeeManagerController : Controller
     {
         private IRepositoryManager _repositoryManager;
@@ -17,6 +19,7 @@ namespace CompanyEmployees.MVC.Controllers
         {
             _repositoryManager = repositoryManager;
         }
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var employees = _repositoryManager.Employee.GetAllEmployees(false);
@@ -35,6 +38,7 @@ namespace CompanyEmployees.MVC.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Insert(Employee model)
         {
             if (ModelState.IsValid)

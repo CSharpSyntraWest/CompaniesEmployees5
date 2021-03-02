@@ -29,6 +29,7 @@ namespace CompanyEmployees.MVC.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Insert(Company model)
         {
             if (ModelState.IsValid)
