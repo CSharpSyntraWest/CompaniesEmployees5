@@ -42,6 +42,15 @@
             </td>
         </tr>
         <tr>
+            <td class="right">
+                <label asp-for="LaunchDate"></label>:
+            </td>
+            <td>
+                <input type="date" asp-for="LaunchDate" />
+                <span asp-validation-for="LaunchDate" class="message"></span>
+            </td>
+        </tr>
+        <tr>
             <td colspan="2">
                 <button type="submit">Bewaar</button>
             </td>

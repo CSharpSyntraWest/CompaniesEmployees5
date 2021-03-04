@@ -7,7 +7,7 @@
    asp-action="Insert"
    class="linkbutton">Voeg toe</a>
 
-@if (!String.IsNullOrEmpty(Context.Request.Query["test"]))
+@*@if (!String.IsNullOrEmpty(Context.Request.Query["test"]))
 {
     <h1>QueryString Value voor 'test' is @Context.Request.Query["test"]</h1>
 }
@@ -102,31 +102,32 @@ else
 }
 <br />
 <h1>@DateTime.Now.Hour.ToString() </h1>
-<h1>@helloWorld</h1>
+<h1>@helloWorld</h1>*@
 <table>
     <tr>
         <th>Naam</th>
         <th>Adres</th>
         <th>Land</th>
+        <th>LanceerDatum</th>
         <th colspan="2">Acties</th>
     </tr>
     @foreach (var item in Model)
     {
-        <tr>
-            <td>@item.Name</td>
-            <td>@item.Address</td>
-            <td>@item.Country</td>
-
-            <td>
-                <a asp-controller="companyManager"
-                   asp-action="Update"
-                   asp-route-id="@item.Id" class="linkbutton">Wijzig</a>
-            </td>
-            <td>
-                <a asp-controller="companyManager"
-                   asp-action="Delete"
-                   asp-route-id="@item.Id" class="linkbutton">Verwijder</a>
-            </td>
-        </tr>
+<tr>
+    <td>@item.Name</td>
+    <td>@item.Address</td>
+    <td>@item.Country</td>
+    <td>@item.LaunchDate?.ToString("dd/MM/yyyy")</td>
+    <td>
+        <a asp-controller="companyManager"
+           asp-action="Update"
+           asp-route-id="@item.Id" class="linkbutton">Wijzig</a>
+    </td>
+    <td>
+        <a asp-controller="companyManager"
+           asp-action="Delete"
+           asp-route-id="@item.Id" class="linkbutton">Verwijder</a>
+    </td>
+</tr>
     }
 </table>

@@ -46,6 +46,14 @@
             </tr>
             <tr>
                 <td class="right">
+                    <label asp-for="LaunchDate"></label> :
+                </td>
+                <td>
+                    @Model.LaunchDate?.ToString("dd/MM/yyyy")
+                </td>
+            </tr>
+            <tr>
+                <td class="right">
                     <label asp-for="Employees"></label>:
                 </td>
                 <td>

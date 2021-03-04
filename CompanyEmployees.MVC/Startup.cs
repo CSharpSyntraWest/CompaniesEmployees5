@@ -37,6 +37,7 @@ namespace CompanyEmployees.MVC
                 opt.LoginPath = "/Security/SignIn";
                 opt.AccessDeniedPath = "/Security/AccessDenied";
             });
+            services.AddSession();
 
             services.AddScoped<IRepositoryManager, RepositoryManager>();
             services.AddControllersWithViews();
@@ -61,7 +62,7 @@ namespace CompanyEmployees.MVC
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

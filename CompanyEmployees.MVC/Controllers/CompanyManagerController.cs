@@ -45,6 +45,7 @@ namespace CompanyEmployees.MVC.Controllers
         }
         public IActionResult Update(Guid id)
         {
+
             Company model = _repositoryManager.Company.GetCompany(id, false);
 
             return View(model);
@@ -53,14 +54,14 @@ namespace CompanyEmployees.MVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Update(Company model)
         {
-
+            //var form = HttpContext.Request.Form["Name"];
             if (ModelState.IsValid)
             {
                 Company companyToUpdate = _repositoryManager.Company.GetCompany(model.Id, true);
                 companyToUpdate.Name = model.Name;
                 companyToUpdate.Address = model.Address;
                 companyToUpdate.Country = model.Country;
-
+                companyToUpdate.LaunchDate = model.LaunchDate;
                 _repositoryManager.Save();
                 ViewBag.Message = "Company updated successfully";
             }

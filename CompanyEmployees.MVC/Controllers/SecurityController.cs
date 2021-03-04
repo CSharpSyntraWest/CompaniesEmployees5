@@ -1,4 +1,5 @@
 ﻿using CompanyEmployees.MVC.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -21,6 +22,7 @@ namespace CompanyEmployees.MVC.Controllers
             this.userManager = userManager;
             this.roleManager = roleManager;
             this.signinManager = signinManager;
+
         }
         public IActionResult Register()
         {
@@ -30,6 +32,8 @@ namespace CompanyEmployees.MVC.Controllers
         [HttpPost]
         public IActionResult Register(Register obj)
         {
+
+
             if (ModelState.IsValid)
             {
                 if (!roleManager.RoleExistsAsync("Manager").Result)
@@ -69,6 +73,7 @@ namespace CompanyEmployees.MVC.Controllers
         [HttpPost]
         public IActionResult SignIn(SignIn obj)
         {
+          
             if (ModelState.IsValid)
             {
                 var result = signinManager.PasswordSignInAsync

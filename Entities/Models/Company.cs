@@ -20,6 +20,9 @@ namespace Entities.Models
         public string Address { get; set; }
         [Display(Name = "Land")]
         public string Country { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name="LanceerDatum")]
+        public DateTime? LaunchDate { get; set;}
         public ICollection<Employee> Employees { get; set; }
     }
 }
