@@ -105,10 +105,10 @@ else
 <h1>@helloWorld</h1>*@
 <table>
     <tr>
-        <th>Naam</th>
-        <th>Adres</th>
-        <th>Land</th>
-        <th>LanceerDatum</th>
+        <th>@Html.DisplayNameFor(model => model.Name)</th>
+        <th>@Html.DisplayNameFor(model => model.Address)</th>
+        <th>@Html.DisplayNameFor(model => model.Country)</th>
+        <th>@Html.DisplayNameFor(model => model.LaunchDate)</th>
         <th colspan="2">Acties</th>
     </tr>
     @foreach (var item in Model)
