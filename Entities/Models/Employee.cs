@@ -12,12 +12,15 @@ namespace Entities.Models
         public Guid Id { get; set; }
         [Required(ErrorMessage = "De naam van de werknemer is verplicht.")]
         [MaxLength(30, ErrorMessage = "De maximale lengte van de naam is 30.")]
+        [Display(Name = "Naam")]
         public string Name { get; set; }
         [Required]
         [Range(18,67,ErrorMessage ="Leeftijd moet tussen 18 en 67 zijn")]
+        [Display(Name = "Leeftijd")]
         public int Age { get; set; }
-        [Required(ErrorMessage = "Position is a required field.")]
-        [MaxLength(20, ErrorMessage = "Maximum length for the Position is 20 characters.")]
+        [Required(ErrorMessage = "Positie is een verplicht veld.")]
+        [MaxLength(20, ErrorMessage = "De maximale lengte van positie is 20.")]
+        [Display(Name = "Positie")]
         public string Position { get; set; }
         [ForeignKey(nameof(Company))]
         public Guid CompanyId { get; set; }

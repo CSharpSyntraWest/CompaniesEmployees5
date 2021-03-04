@@ -10,12 +10,15 @@ namespace Entities.Models
     {
         [Column("CompanyId")]
         public Guid Id { get; set; }
-        [Required(ErrorMessage = "Company name is a required field.")]
-        [MaxLength(60, ErrorMessage = "Maximum length for the Name is 60 characters.")]
+        [Required(ErrorMessage = "Naam is een verplicht veld.")]
+        [MaxLength(60, ErrorMessage = "Maximum lengte voor de naam is 60.")]
+        [Display(Name = "Naam")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Company address is a required field.")]
-        [MaxLength(60, ErrorMessage = "Maximum length for rhe Address is 60 characte")]
+        [Required(ErrorMessage = "adres is een verplicht veld.")]
+        [MaxLength(60, ErrorMessage = "Maximum lengte voor het adres is 60")]
+        [Display(Name = "Adres")]
         public string Address { get; set; }
+        [Display(Name = "Land")]
         public string Country { get; set; }
         public ICollection<Employee> Employees { get; set; }
     }

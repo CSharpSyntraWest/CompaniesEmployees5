@@ -1,6 +1,6 @@
 ﻿@model Entities.Models.Company
 
-<h2>Update existing company</h2>
+<h2>Wijzig bestaand bedrijf</h2>
 <h3 class="message">@ViewBag.Message</h3>
 
 <form asp-controller="CompanyManager" asp-action="Update" method="post">
@@ -43,12 +43,12 @@
         </tr>
         <tr>
             <td colspan="2">
-                <button type="submit">Save</button>
+                <button type="submit">Bewaar</button>
             </td>
         </tr>
     </table>
 </form>
 <br />
 <br />
-<a asp-controller="CompanyManager" asp-action="Index">Back to Company Listing</a>
+<a asp-controller="CompanyManager" asp-action="Index">Terug naar bedrijvenlijst</a>
 

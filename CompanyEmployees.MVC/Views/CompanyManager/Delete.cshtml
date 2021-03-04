@@ -1,6 +1,6 @@
 ﻿@model Company
 
-<h2>Delete Existing Company</h2>
+<h2>Verwijder bestaand bedrijf y</h2>
 
 <h3 class="message">
     @ViewBag.Message
@@ -50,14 +50,14 @@
                 </td>
                 <td>
                     <select asp-for="Employees" asp-items="@ViewBag.Employees" size="5">
-                        <option value="">--Employees--</option>
+                        <option value="">--werknemers--</option>
                     </select>
                     <span asp-validation-for="Employees" class="message"></span>
                 </td>
             </tr>
             <tr>
                 <td colspan="2">
-                    <button type="submit">Delete</button>
+                    <button type="submit">Verwijder</button>
                 </td>
             </tr>
         </table>
@@ -66,6 +66,6 @@
     <br />
     <br />
 
-    <a asp-controller="CompanyManager" asp-action="Index">Back to Company Listing</a>
+    <a asp-controller="CompanyManager" asp-action="Index">Terug naar bedrijvenlijst</a>
 
 
