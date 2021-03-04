@@ -23,6 +23,10 @@ namespace Entities.Models
         [DataType(DataType.Date)]
         [Display(Name="LanceerDatum")]
         public DateTime? LaunchDate { get; set;}
+        [MinLength(5, ErrorMessage = "De minimale lengte van beschrijving is 5 karakters")]
+        [MaxLength(250, ErrorMessage = "De maximale lengte van positie is 250 karakters")]
+        [Display(Name = "Beschrijving")]
+        public string Description { get; set; }
         public ICollection<Employee> Employees { get; set; }
     }
 }

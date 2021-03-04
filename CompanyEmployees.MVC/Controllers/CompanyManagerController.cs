@@ -39,7 +39,7 @@ namespace CompanyEmployees.MVC.Controllers
             {
                 _repositoryManager.Company.CreateCompany(model);
                 _repositoryManager.Save();
-                ViewBag.Message = "Company inserted";
+                ViewBag.Message = "Bedrijf toegevoegd";
             }
             return View(model);
         }
@@ -62,8 +62,9 @@ namespace CompanyEmployees.MVC.Controllers
                 companyToUpdate.Address = model.Address;
                 companyToUpdate.Country = model.Country;
                 companyToUpdate.LaunchDate = model.LaunchDate;
+                companyToUpdate.Description = model.Description;
                 _repositoryManager.Save();
-                ViewBag.Message = "Company updated successfully";
+                ViewBag.Message = "Bedrijf is aangepast";
             }
             return View(model);
         }
@@ -86,7 +87,7 @@ namespace CompanyEmployees.MVC.Controllers
             //    return View(new Company());
             //}
             //else {
-                ViewBag.Message = "Warning : You are about to delete this company";
+                ViewBag.Message = "Waarschuwing : U gaat dit bedrijf verwijderen!";
                 Company company = _repositoryManager.Company.GetCompany(id, false);
                 FillEmployeesForCompany(id);
                 return View(company);
@@ -110,7 +111,7 @@ namespace CompanyEmployees.MVC.Controllers
                 _repositoryManager.Company.DeleteCompany(companyToDelete);
                 _repositoryManager.Save();
 
-                TempData["Message"] = "Company deleted successfully";
+                TempData["Message"] = "Bedrijf verwijderd";
                 return RedirectToAction(nameof(Index));
             //}
         }

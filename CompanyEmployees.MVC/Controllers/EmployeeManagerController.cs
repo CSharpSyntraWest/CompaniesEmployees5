@@ -45,7 +45,7 @@ namespace CompanyEmployees.MVC.Controllers
             {
                 _repositoryManager.Employee.CreateEmployeeForCompany(model.CompanyId, model);
                 _repositoryManager.Save();
-                ViewBag.Message = "Employee inserted";
+                ViewBag.Message = "Werknemer toegevoegd";
             }
             FillCompanies();
             return View(model);
@@ -75,7 +75,7 @@ namespace CompanyEmployees.MVC.Controllers
                 employeeToUpdate.CompanyId = model.CompanyId;
                 employeeToUpdate.Description = model.Description;
                 _repositoryManager.Save();
-                ViewBag.Message = "Employee updated successfully";
+                ViewBag.Message = "Gegevens werknemer aangepast";
             }
             return View(model);
         }
@@ -83,6 +83,7 @@ namespace CompanyEmployees.MVC.Controllers
         [ActionName("Delete")]
         public IActionResult ConfirmDelete(Guid id)
         {
+            ViewBag.Message = "Opgelet: U gaat deze werknemer verwijderen!";
             Employee model = _repositoryManager.Employee.GetEmployee(id, false);
             Company company = _repositoryManager.Company.GetCompany(model.CompanyId, false);
             ViewBag.Company = company;
@@ -97,7 +98,7 @@ namespace CompanyEmployees.MVC.Controllers
             Employee employeeToDelete = _repositoryManager.Employee.GetEmployee(id, false);
             _repositoryManager.Employee.DeleteEmployee(employeeToDelete);
             _repositoryManager.Save();
-            TempData["Message"] = "Employee deleted successfully";
+            TempData["Message"] = "Werknemer verwijderd";
             return RedirectToAction(nameof(Index));
         }
 

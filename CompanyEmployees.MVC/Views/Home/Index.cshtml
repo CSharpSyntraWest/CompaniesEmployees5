@@ -6,7 +6,7 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    @{ 
+    @{
         Context.Session.SetString("MijnSessionVar", "MijnWaarde");
         var name = Context.Session.GetString("MijnSessionVar");
         bool bestaatCookieWaarde = false;
@@ -17,5 +17,6 @@
         var cookieWaarde = Context.Request.Cookies["MijnId"];
 
     }
-    <h1>Session MijnSessionVar: @name</h1>
+    <h1>Session 'MijnSessionVar': @name</h1>
+    <h1>Cookie 'MijnId': @cookieWaarde</h1>
 </div>

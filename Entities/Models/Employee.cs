@@ -24,6 +24,7 @@ namespace Entities.Models
         public string Position { get; set; }
         [MinLength(10,ErrorMessage="De minimale lengte van beschrijving is 10 karakters")]
         [MaxLength(500, ErrorMessage = "De maximale lengte van positie is 500 karakters")]
+        [Display(Name = "Beschrijving")]
         public string Description { get; set; }
 
         [ForeignKey(nameof(Company))]
