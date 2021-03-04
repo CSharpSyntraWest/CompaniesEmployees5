@@ -73,6 +73,7 @@ namespace CompanyEmployees.MVC.Controllers
                 employeeToUpdate.Position = model.Position;
                 employeeToUpdate.Age = model.Age;
                 employeeToUpdate.CompanyId = model.CompanyId;
+                employeeToUpdate.Description = model.Description;
                 _repositoryManager.Save();
                 ViewBag.Message = "Employee updated successfully";
             }

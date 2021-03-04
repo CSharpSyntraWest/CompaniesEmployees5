@@ -22,6 +22,10 @@ namespace Entities.Models
         [MaxLength(20, ErrorMessage = "De maximale lengte van positie is 20.")]
         [Display(Name = "Positie")]
         public string Position { get; set; }
+        [MinLength(10,ErrorMessage="De minimale lengte van beschrijving is 10 karakters")]
+        [MaxLength(500, ErrorMessage = "De maximale lengte van positie is 500 karakters")]
+        public string Description { get; set; }
+
         [ForeignKey(nameof(Company))]
         public Guid CompanyId { get; set; }
         public Company Company { get; set; }
