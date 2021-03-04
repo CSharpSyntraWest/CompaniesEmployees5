@@ -109,6 +109,7 @@ else
         <th>@Html.DisplayNameFor(model => model.Address)</th>
         <th>@Html.DisplayNameFor(model => model.Country)</th>
         <th>@Html.DisplayNameFor(model => model.LaunchDate)</th>
+        <th>@Html.DisplayNameFor(model => model.Size)</th>
         <th colspan="2">Acties</th>
     </tr>
     @foreach (var item in Model)
@@ -118,6 +119,7 @@ else
     <td>@item.Address</td>
     <td>@item.Country</td>
     <td>@item.LaunchDate?.ToString("dd/MM/yyyy")</td>
+    <td>@item.Size.ToString()</td>
     <td>
         <a asp-controller="companyManager"
            asp-action="Update"

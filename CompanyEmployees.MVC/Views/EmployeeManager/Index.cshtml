@@ -72,10 +72,10 @@ else
 <br />
 <table>
     <tr>
-        <th>Naam</th>
-        <th>Positie</th>
-        <th>Leeftijd</th>
-        <th>Geslacht</th>
+        <th>@Html.DisplayNameFor(model => model.Name)</th>
+        <th>@Html.DisplayNameFor(model => model.Position)</th>
+        <th>@Html.DisplayNameFor(model => model.Age)</th>
+        <th>@Html.DisplayNameFor(model => model.Gender)</th>
         <th colspan="2">Acties</th>
     </tr>
     @foreach (var item in Model)

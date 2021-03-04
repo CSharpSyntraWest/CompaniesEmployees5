@@ -5,6 +5,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Models
 {
+    public enum CompanySize
+    { 
+        Small,
+        Medium,
+        Big
+    }
     [Table("Company")]
     public class Company
     {
@@ -23,6 +29,9 @@ namespace Entities.Models
         [DataType(DataType.Date)]
         [Display(Name="LanceerDatum")]
         public DateTime? LaunchDate { get; set;}
+        [Display(Name="Grootte")]
+        public CompanySize Size { get; set; }
+
         [MinLength(5, ErrorMessage = "De minimale lengte van beschrijving is 5 karakters")]
         [MaxLength(250, ErrorMessage = "De maximale lengte van positie is 250 karakters")]
         [Display(Name = "Beschrijving")]

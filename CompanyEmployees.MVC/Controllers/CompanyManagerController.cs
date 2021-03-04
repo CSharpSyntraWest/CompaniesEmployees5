@@ -63,6 +63,7 @@ namespace CompanyEmployees.MVC.Controllers
                 companyToUpdate.Country = model.Country;
                 companyToUpdate.LaunchDate = model.LaunchDate;
                 companyToUpdate.Description = model.Description;
+                companyToUpdate.Size = model.Size;
                 _repositoryManager.Save();
                 ViewBag.Message = "Bedrijf is aangepast";
             }

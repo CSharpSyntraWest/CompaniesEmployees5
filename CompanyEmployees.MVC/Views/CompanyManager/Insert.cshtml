@@ -43,6 +43,15 @@
         </tr>
         <tr>
             <td class="right">
+                <label asp-for="Size"></label>:
+            </td>
+            <td>
+                <select asp-for="Size" asp-items="Html.GetEnumSelectList<CompanySize>()">
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="right">
                 <label asp-for="Description"></label>:
             </td>
             <td>
