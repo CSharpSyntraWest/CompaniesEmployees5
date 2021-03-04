@@ -74,6 +74,7 @@ namespace CompanyEmployees.MVC.Controllers
                 employeeToUpdate.Age = model.Age;
                 employeeToUpdate.CompanyId = model.CompanyId;
                 employeeToUpdate.Description = model.Description;
+                employeeToUpdate.Gender = model.Gender;
                 _repositoryManager.Save();
                 ViewBag.Message = "Gegevens werknemer aangepast";
             }

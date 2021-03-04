@@ -27,6 +27,15 @@
         </tr>
         <tr>
             <td class="right">
+                <label asp-for="Gender"></label>:
+            </td>
+            <td>
+                <select asp-for="Gender" asp-items="Html.GetEnumSelectList<GeslachtType>()">                   
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="right">
                 <label asp-for="Position"></label>:
             </td>
             <td>

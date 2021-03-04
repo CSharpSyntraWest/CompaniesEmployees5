@@ -3,7 +3,7 @@
 <h2>Delete Existing Employee</h2>
 
 <h3 class="message">
-    Warning : You are about to delete an employee record.
+   @ViewBag.Message
 </h3>
 
 <form asp-controller="EmployeeManager" asp-action="Delete" method="post">
@@ -33,6 +33,14 @@
             </td>
             <td>
                 @Model.Age
+            </td>
+        </tr>
+        <tr>
+            <td class="right">
+                <label asp-for="Gender"></label> :
+            </td>
+            <td>
+                @Model.Gender.ToString()
             </td>
         </tr>
         <tr>

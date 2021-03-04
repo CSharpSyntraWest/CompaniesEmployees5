@@ -6,7 +6,7 @@
    asp-action="Insert"
    class="linkbutton">Insert</a>
 
-<br />
+@*<br />
 
 @if (!String.IsNullOrEmpty(Context.Request.Query["mijnparam"]))
 {
@@ -68,14 +68,15 @@ else
 
     PrintLeeftijdTekst(employee);
     <br />
-}
+}*@
 <br />
 <table>
     <tr>
-        <th>Name</th>
-        <th>Position</th>
-        <th>Age</th>
-        <th colspan="2">Actions</th>
+        <th>Naam</th>
+        <th>Positie</th>
+        <th>Leeftijd</th>
+        <th>Geslacht</th>
+        <th colspan="2">Acties</th>
     </tr>
     @foreach (var item in Model)
     {
@@ -83,7 +84,7 @@ else
     <td>@item.Name</td>
     <td>@item.Position</td>
     <td>@item.Age</td>
-
+    <td>@item.Gender.ToString()</td>
     <td>
         <a asp-controller="employeeManager"
            asp-action="Update"

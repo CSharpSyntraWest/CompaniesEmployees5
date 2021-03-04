@@ -6,6 +6,12 @@ using System.Text;
 
 namespace Entities.Models
 {
+    public enum GeslachtType
+    { 
+        Man,
+        Vrouw,
+        X
+    }
     public class Employee
     {
         [Column("EmployeeId")]
@@ -26,6 +32,9 @@ namespace Entities.Models
         [MaxLength(500, ErrorMessage = "De maximale lengte van positie is 500 karakters")]
         [Display(Name = "Beschrijving")]
         public string Description { get; set; }
+
+        [Display(Name="Geslacht")]
+        public GeslachtType Gender { get; set; }
 
         [ForeignKey(nameof(Company))]
         public Guid CompanyId { get; set; }
