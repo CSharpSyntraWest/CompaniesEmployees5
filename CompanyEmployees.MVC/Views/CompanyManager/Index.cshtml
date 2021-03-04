@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Company>
+
 <h2>Bedrijvenlijst</h2>
 <h2 class="message">@TempData["Message"]</h2>
 
@@ -6,9 +7,102 @@
    asp-action="Insert"
    class="linkbutton">Voeg toe</a>
 
-<br />
-<br />
+@if (!String.IsNullOrEmpty(Context.Request.Query["test"]))
+{
+    <h1>QueryString Value voor 'test' is @Context.Request.Query["test"]</h1>
+}
+else
+{
+    <h1>Geen QueryString value voor 'test'</h1>
+}
 
+@if (!String.IsNullOrEmpty(Context.Request.Query["test2"]))
+{
+    <h1>QueryString Value voor 'test2' is @Context.Request.Query["test2"]</h1>
+}
+else
+{
+    <h1>Geen QueryString value voor 'test2'</h1>
+}
+
+@{
+
+    string helloWorld = "Goedendag!";
+
+    if (DateTime.Now.Hour > 11)
+    {
+        helloWorld = "Goedemiddag!";
+    }
+    else if (DateTime.Now.Hour > 13)
+    {
+        helloWorld = "Goede namiddag";
+    }
+    else if (DateTime.Now.Hour > 18)
+    {
+        helloWorld = "Goedenavond";
+    }
+}
+
+@if (DateTime.IsLeapYear(DateTime.Now.Year))//Is het een schrikkeljaar?
+{
+    <h1>Het jaar @DateTime.Now.Year.ToString() is een schrikkeljaar</h1>
+
+}
+else
+{
+    <h1>Het jaar @DateTime.Now.Year.ToString() is geen schrikkeljaar</h1>
+}
+<ul>
+    @for (int i = 0; i < Model.ToList().Count; i++)
+    {
+        var item = Model.ToList()[i];
+        <li>@item.Name</li>
+
+    }
+</ul>
+
+<br />
+<ol>
+    @{
+
+        int teller = 0;
+    }
+    @while (teller < Model.ToList().Count)
+    {
+        var item = Model.ToList()[teller++];
+        <li>@item.Name</li>
+    }
+</ol>
+<br />
+@switch (DateTime.Now.DayOfWeek)
+{
+    case DayOfWeek.Monday:
+        <h2>baaldag</h2>
+        break;
+    case DayOfWeek.Sunday:
+        <h2>Wandeldag</h2>
+        break;
+    default:
+        <h2>gewone dag</h2>
+        break;
+}
+<br />
+@{ 
+    void Printgegevens(Company company)
+    { 
+        <h2>@company.Name  Adres: @company.Address land: @company.Country</h2>
+    }
+
+}
+
+@foreach(Company company in Model)
+{
+    Printgegevens(company);
+
+}
+<br />
+<h1>@DateTime.Now.Hour.ToString() </h1>
+<h1>@helloWorld</h1>
 <table>
     <tr>
         <th>Naam</th>
