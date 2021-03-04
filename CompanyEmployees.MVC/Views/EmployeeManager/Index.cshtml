@@ -7,13 +7,75 @@
    class="linkbutton">Insert</a>
 
 <br />
+
+@if (!String.IsNullOrEmpty(Context.Request.Query["mijnparam"]))
+{
+    <b>QueryString Value voor 'mijnparam' is @Context.Request.Query["mijnparam"]</b>
+}
+else
+{
+    <b>Geen QueryString value voor 'mijnparam'</b>
+}
+<br />
+@{
+    void PrintLeeftijdTekst(Employee employee)
+    {
+        int leeftijd = employee.Age;
+        if (leeftijd < 20)
+        {
+            <i>Junior</i>
+        }
+        else if (leeftijd < 50)
+        {
+            <i>Senior</i>
+        }
+        else
+        {
+            <i>Bijna op pensioen</i>
+        }
+
+    }
+
+
+}
 <br />
 
+<ul>
+    @for (int i = 0; i < Model.ToList().Count; i++)
+    {
+        var item = Model.ToList()[i];
+        <li>@item.Name</li>
+
+    }
+</ul>
+
+<br />
+<ol>
+    @{
+
+        int teller = 0;
+    }
+    @while (teller < Model.ToList().Count)
+    {
+        var item = Model.ToList()[teller++];
+        <li>@item.Name</li>
+    }
+</ol>
+
+<br />
+@foreach (Employee employee in Model)
+{
+
+    PrintLeeftijdTekst(employee);
+    <br />
+}
+<br />
 <table>
     <tr>
         <th>Name</th>
         <th>Position</th>
         <th>Age</th>
+
         <th colspan="2">Actions</th>
     </tr>
     @foreach (var item in Model)
