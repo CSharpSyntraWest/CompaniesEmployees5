@@ -30,6 +30,7 @@ namespace CompanyEmployees.MVC.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Register(Register obj)
         {
 
@@ -47,8 +48,7 @@ namespace CompanyEmployees.MVC.Controllers
                 IdentityUser user = new IdentityUser();
                 user.UserName = obj.UserName;
                 user.Email = obj.Email;
-                //user.FullName = obj.FullName;
-                //user.BirthDate = obj.BirthDate;
+
 
                 IdentityResult result = userManager.CreateAsync
                 (user, obj.Password).Result;
@@ -71,6 +71,7 @@ namespace CompanyEmployees.MVC.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult SignIn(SignIn obj)
         {
           

@@ -5,15 +5,19 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+//https://www.mikesdotnetting.com/article/345/localisation-in-asp-net-core-razor-pages-cultures
 
 namespace CompanyEmployees.MVC
 {
@@ -41,6 +45,17 @@ namespace CompanyEmployees.MVC
 
             services.AddScoped<IRepositoryManager, RepositoryManager>();
             services.AddControllersWithViews();
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[]
+                 {
+                    new CultureInfo("en-US"),
+                    new CultureInfo("nl")
+                };
+                options.DefaultRequestCulture = new RequestCulture("nl");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +75,8 @@ namespace CompanyEmployees.MVC
             app.UseStaticFiles();
 
             app.UseRouting();
+            var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>().Value;
+            app.UseRequestLocalization(localizationOptions);
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();

@@ -25,6 +25,12 @@ namespace CompanyEmployees.MVC.Controllers
             var employees = _repositoryManager.Employee.GetAllEmployees(false);
             return View(employees);
         }
+        [AllowAnonymous]
+        public IActionResult Details(Guid id)
+        {
+            var employee = _repositoryManager.Employee.GetEmployee(id,false);
+            return View(employee);
+        }
         private void FillCompanies()
         {
             List<SelectListItem> companies = (from c in _repositoryManager.Company.GetAllCompanies(false)

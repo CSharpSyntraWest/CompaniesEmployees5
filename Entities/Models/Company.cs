@@ -27,7 +27,7 @@ namespace Entities.Models
         [Display(Name = "Land")]
         public string Country { get; set; }
         [DataType(DataType.Date)]
-        //[DisplayFormat(DataFormatString ="{0:dd-MM-yyyy}", ApplyFormatInEditMode =true)]
+        [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}", ApplyFormatInEditMode =true)]
         [Display(Name="LanceerDatum")]
         public DateTime? LaunchDate { get; set;}
         [Display(Name="Grootte")]

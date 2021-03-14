@@ -3,7 +3,7 @@
 <h2>Wijzig bestaand bedrijf</h2>
 <h3 class="message">@ViewBag.Message</h3>
 
-<form asp-controller="CompanyManager" asp-action="Update" method="post">
+<form asp-controller="CompanyManager" asp-action="Update" method="post" >
     <table>
         <tr>
             <td class="right">
@@ -46,7 +46,7 @@
                 <label asp-for="LaunchDate"></label>:
             </td>
             <td>
-                <input type="date" asp-for="LaunchDate" />
+                <input type="date" asp-for="LaunchDate" asp-format="@Model.LaunchDate?.ToString($"{0:dd/MM/yyyy}")"/>
                 <span asp-validation-for="LaunchDate" class="message"></span>
             </td>
         </tr>
