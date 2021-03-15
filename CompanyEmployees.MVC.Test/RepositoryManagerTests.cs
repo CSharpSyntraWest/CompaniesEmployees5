@@ -17,7 +17,7 @@ namespace CompanyEmployees.MVC.Test
     public class RepositoryManagerTests
     {
 
-        //Employees TESTS
+        #region EmployeesRepoTests//EMPLOYEES TESTS 
 
         [Test]
         public void GetAllEmployees_ShouldReturnAllEmployeesFromContext()
@@ -155,7 +155,35 @@ namespace CompanyEmployees.MVC.Test
                 }
             }
         }
-        //COMPANIES TESTS
+        [Test]
+        public void DeleteEmployee_ShouldRemoveEmployeeFromContext()
+        {
+            using (var factory = new TestRepositoryContextFactory())
+            {
+                //Arrange          
+                Guid testEmployeeId;
+                int count;
+                using (var context = factory.CreateContext())
+                {
+                    count = context.Employees.Count();
+                    var repository = new RepositoryManager(context);
+                    var firstEmployee = context.Employees.FirstOrDefault();
+                    testEmployeeId = firstEmployee.Id;
+                    //Act
+                    repository.Employee.DeleteEmployee(firstEmployee);
+
+                    repository.Save();
+                }
+                //Assert
+                using (var context = factory.CreateContext())
+                {
+                    Assert.AreEqual(count - 1, context.Employees.Count());
+                    Assert.IsFalse(context.Employees.Where(c => c.Id == testEmployeeId).Any());
+                }
+            }
+        }
+        #endregion //EMPLOYEES TESTS
+        #region CompaniesRepoTests//COMPANIES TESTS
         [Test]
         public void GetCompany_ShouldReturnCompany()
         {
@@ -255,7 +283,34 @@ namespace CompanyEmployees.MVC.Test
             }
 
         }
+        [Test]
+        public void DeleteCompany_ShouldRemoveCompanyFromContext()
+        { 
+            using (var factory = new TestRepositoryContextFactory())
+            {
+                //Arrange          
+                Guid testCompanyId;
+                int count;
+                using (var context = factory.CreateContext())
+                {
+                    count = context.Companies.Count();
+                    var repository = new RepositoryManager(context);
+                    var firstCompany = context.Companies.FirstOrDefault();
+                    testCompanyId = firstCompany.Id;
+                    //Act
+                    repository.Company.DeleteCompany(firstCompany);
 
+                    repository.Save();
+                }
+                //Assert
+                using (var context = factory.CreateContext())
+                {
+                    Assert.AreEqual(count-1, context.Companies.Count());
+                    Assert.IsFalse(context.Companies.Where(c => c.Id == testCompanyId).Any());
+                }
+            }
+        }
+        #endregion //COMPANIES TESTS
     }
 }
 
