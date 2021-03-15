@@ -19,8 +19,6 @@ namespace CompanyEmployees.MVC.Test
                 Name = "Jos"
             };
             dbContext.Employees.Add(testEmployee);
-            //dbContext.Players.Add(new Player("Jos", "De Klos", 183, 84, new DateTime(1961, 1, 26)) { Id = 7, Created = DateTime.UtcNow });
-            //dbContext.Players.Add(new Player("Joke", "De Klos", 193, 91, new DateTime(1965, 11, 5)) { Id = 8, Created = DateTime.UtcNow });
             dbContext.SaveChanges();
         }
         public static IEnumerable<Employee> GetTestEmployees()
@@ -31,12 +29,14 @@ namespace CompanyEmployees.MVC.Test
                     {
                         Id = new Guid("80abbca8-664d-4b20-b5de-024705497d4a"),
                         CompanyId = Guid.NewGuid(),
-                        Name = "John"
+                        Name = "John",
+                        Position = "Developer"
                     },
                     new Employee()
                     {
                         Id = new Guid("86dba8c0-d178-41e7-938c-ed49778fb52a"),
                         CompanyId = Guid.NewGuid(),
+                        Position = "Analyst",
                         Name = "Doe"
                     }
                 };
@@ -45,24 +45,7 @@ namespace CompanyEmployees.MVC.Test
         {
             return SeedTestData.GetTestEmployees().FirstOrDefault();
         }
-        //private IEnumerable<Employee> GetTestEmployees()
-        //{
-        //    return new List<Employee>()
-        //        {
-        //            new Employee()
-        //            {
-        //                Id = new Guid("80abbca8-664d-4b20-b5de-024705497d4a"),
-        //                CompanyId = Guid.NewGuid(),
-        //                Name = "John"
-        //            },
-        //            new Employee()
-        //            {
-        //                Id = new Guid("86dba8c0-d178-41e7-938c-ed49778fb52a"),
-        //                CompanyId = Guid.NewGuid(),
-        //                Name = "Doe"
-        //            }
-        //        };
-        //}
+       
         public static IEnumerable<Company> GetTestCompanies()
         {
             return new List<Company>()
