@@ -26,7 +26,12 @@ namespace CompanyEmployees.MVC.Controllers
             var companies = _repositoryManager.Company.GetAllCompanies(false);
             return View(companies);
         }
-        // [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Details(Guid id)
+        {
+            var company = _repositoryManager.Company.GetCompany(id, false);
+            return View(company);
+        }
         public IActionResult Insert()
         {
             return View();

@@ -1,5 +1,5 @@
 ﻿@model Employee
-<h2>Update Existing Employee</h2>
+<h2>Wijzig bestaande werknemer</h2>
 <h3 class="message">@ViewBag.Message</h3>
 
 <form asp-controller="EmployeeManager" asp-action="Update" method="post">
@@ -56,7 +56,7 @@
             </td>
             <td>
                 <select asp-for="CompanyId" asp-items="@ViewBag.Companies">
-                    <option value="">Please select</option>
+                    <option value="">Selecteer</option>
                 </select>
                 <span asp-validation-for="CompanyId" class="message"></span>
             </td>
@@ -72,7 +72,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                <button type="submit">Save</button>
+                <button type="submit">Bewaar</button>
             </td>
         </tr>
     </table>
@@ -80,5 +80,5 @@
 </form>
 <br />
 <br />
-<a asp-controller="employeemanager" asp-action="Index">Back to Employee Listing</a>
+<a asp-controller="employeemanager" asp-action="Index">Terug naar lijst werknemers</a>
 
