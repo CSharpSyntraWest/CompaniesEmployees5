@@ -1,7 +1,9 @@
 ﻿using CompanyEmployees.MVC.Controllers;
 using Contracts;
 using Entities.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -93,8 +95,31 @@ namespace CompanyEmployees.MVC.Test
         [Test]
         public void Delete_SetsMessageAndReturnsRedirectToActionResult()
         {
+            // Arrange
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+            var testDeleteCompany = SeedTestData.GetTestCompany();
+            mockRepo.Setup(repo => repo.Company.GetCompany(testDeleteCompany.Id, false))
+                .Returns(testDeleteCompany);
+
+            var controller = new CompanyManagerController(mockRepo.Object) { TempData = tempData };
+
+            // Act
+            var result = controller.Delete(testDeleteCompany.Id);
+
+            // Assert
+            Assert.IsInstanceOf<RedirectToActionResult>(result);
+            var redirectToActionResult = result as RedirectToActionResult;
+            Assert.AreEqual("Index", redirectToActionResult.ActionName);
+            Assert.AreEqual(tempData["Message"], "Bedrijf verwijderd");
+        }
+        [Test]
+        public void Update_Company_ReturnsViewResult_WithCompany()
+        {
             //Arrange
+
             //Act
+
             //Assert
         }
     }

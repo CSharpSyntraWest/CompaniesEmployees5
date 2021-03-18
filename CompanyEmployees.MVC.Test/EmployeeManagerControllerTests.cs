@@ -104,5 +104,24 @@ namespace CompanyEmployees.MVC.Test
             Assert.AreEqual("Index", redirectToActionResult.ActionName);
             Assert.AreEqual(tempData["Message"], "Werknemer verwijderd");
         }
+        [Test]
+        public void Update_Employee_ReturnViewResult_WithEmployee()
+        {
+            //Arrange
+            Employee employeeToUpdate = SeedTestData.GetTestEmployee();
+            Guid employeeToUpdateId = employeeToUpdate.Id;
+            mockRepo.Setup(repo => repo.Employee.GetEmployee(employeeToUpdateId, true))
+                .Returns(employeeToUpdate);
+            mockRepo.Setup(repo => repo.Save()).Verifiable();
+            var controller = new EmployeeManagerController(mockRepo.Object);
+            employeeToUpdate.Name = "gewijzigde naam";
+            //Act
+            var result = controller.Update(employeeToUpdate);
+            //Assert
+            Assert.IsInstanceOf<ViewResult>(result);
+            ViewResult viewResult = result as ViewResult;
+            Assert.AreEqual(employeeToUpdate, viewResult.Model);
+            mockRepo.Verify();
+        }
     }
 }
