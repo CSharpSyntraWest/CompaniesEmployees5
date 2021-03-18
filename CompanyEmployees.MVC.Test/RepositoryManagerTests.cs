@@ -52,6 +52,12 @@ namespace CompanyEmployees.MVC.Test
                     var empl = repository.Employee.GetEmployee(testEmployeeId, false);
                     Assert.IsNotNull(empl);
                     Assert.AreEqual(testEmployeeId, empl.Id);
+                    Assert.AreEqual(testEmployee.Name, empl.Name);
+                    Assert.AreEqual(testEmployee.Age, empl.Age);
+                    Assert.AreEqual(testEmployee.Description, empl.Description);
+                    Assert.AreEqual(testEmployee.Gender, empl.Gender);
+                    Assert.AreEqual(testEmployee.Position, empl.Position);
+                    Assert.AreEqual(testEmployee.CompanyId, empl.CompanyId);
                 }
             }
         }
@@ -91,6 +97,12 @@ namespace CompanyEmployees.MVC.Test
                     var addedEmployee = context.Employees.Find(testEmployeeId);
                     Assert.IsNotNull(addedEmployee);
                     Assert.AreEqual(testEmployeeId, addedEmployee.Id);
+                    Assert.AreEqual(testEmployee.Name, addedEmployee.Name);
+                    Assert.AreEqual(testEmployee.Age, addedEmployee.Age);
+                    Assert.AreEqual(testEmployee.Description, addedEmployee.Description);
+                    Assert.AreEqual(testEmployee.Gender, addedEmployee.Gender);
+                    Assert.AreEqual(testEmployee.Position, addedEmployee.Position);
+                    Assert.AreEqual(testEmployee.CompanyId, addedEmployee.CompanyId);
                 }
             }
         }
@@ -167,7 +179,7 @@ namespace CompanyEmployees.MVC.Test
             }
         }
         #endregion //EMPLOYEES TESTS
-  #region CompaniesRepoTests//COMPANIES TESTS
+        #region CompaniesRepoTests//COMPANIES TESTS
         [Test]
         public void GetAllCompanies_ShouldReturnAllCompaniesFromContext()
         {
@@ -201,6 +213,13 @@ namespace CompanyEmployees.MVC.Test
                     //Assert
                     Assert.IsNotNull(comp);
                     Assert.AreEqual(testCompanyId, comp.Id);
+                    //Aanvullen: andere properties ook testen op gelijkheid
+                    Assert.AreEqual(testCompany.Name, comp.Name);
+                    Assert.AreEqual(testCompany.LaunchDate, comp.LaunchDate);
+                    Assert.AreEqual(testCompany.Size, comp.Size);
+                    Assert.AreEqual(testCompany.Address, comp.Address);
+                    Assert.AreEqual(testCompany.Country, comp.Country);
+                    Assert.AreEqual(testCompany.Description, comp.Description);
                 }
             }
         }
@@ -212,10 +231,11 @@ namespace CompanyEmployees.MVC.Test
                 //Arrange
                 int count = 0;
                 Guid testCompanyId;
+                Company testCompany;//Hier de declaratie van testCompany plaatsen
                 using (var context = factory.CreateContext())
                 {
                     testCompanyId = Guid.NewGuid();
-                    Company testCompany = new Company()
+                    testCompany = new Company() //Verwijder Company declaratie, hier initialiseren
                     {
                         Id = testCompanyId,
                         Name = "Test bedrijf",
@@ -238,6 +258,13 @@ namespace CompanyEmployees.MVC.Test
                     var addedCompany = context.Companies.FirstOrDefault(e => e.Id == testCompanyId);
                     Assert.IsNotNull(addedCompany);
                     Assert.AreEqual(testCompanyId, addedCompany.Id);
+                    //Aanvullen: andere properties ook testen op gelijkheid
+                    Assert.AreEqual(testCompany.Name, addedCompany.Name);
+                    Assert.AreEqual(testCompany.LaunchDate, addedCompany.LaunchDate);
+                    Assert.AreEqual(testCompany.Size, addedCompany.Size);
+                    Assert.AreEqual(testCompany.Address, addedCompany.Address);
+                    Assert.AreEqual(testCompany.Country, addedCompany.Country);
+                    Assert.AreEqual(testCompany.Description, addedCompany.Description);
                 }
             }
         }
