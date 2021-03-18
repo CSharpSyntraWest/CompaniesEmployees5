@@ -74,10 +74,27 @@ namespace CompanyEmployees.MVC.Test
         [Test]
         public void Insert_InsertsCompanyAndReturnsAViewResult_WithAnCompany()
         {
+            // Arrange
+            var newCompany = SeedTestData.GetTestCompany();
+            mockRepo.Setup(repo => repo.Company.CreateCompany(newCompany))
+                .Verifiable();//newCompany geeft 'nauwere test' ipv It.IsAny<Company>());
+            var controller = new CompanyManagerController(mockRepo.Object);
+
+
+            // Act
+            var result = controller.Insert(newCompany);
+
+            // Assert
+            Assert.IsInstanceOf<ViewResult>(result);
+            var viewResult = result as ViewResult;
+            Assert.AreEqual(viewResult.Model, newCompany);
+            mockRepo.Verify();
+        }
+        [Test]
+        public void Delete_SetsMessageAndReturnsRedirectToActionResult()
+        {
             //Arrange
-
             //Act
-
             //Assert
         }
     }

@@ -1,7 +1,9 @@
 ﻿using CompanyEmployees.MVC.Controllers;
 using Contracts;
 using Entities.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -83,6 +85,24 @@ namespace CompanyEmployees.MVC.Test
             var viewResult = result as ViewResult;
             Assert.AreEqual(viewResult.Model, newEmployee);
             mockRepo.Verify();//Hier wordt geverifieerd om de CreateEmployeeForCompany wordt aangeroepen, indien ja, is de test ok
+        }
+        [Test]
+        public void Delete_SetsMessageAndReturnsRedirectToActionResult()
+        {
+            //Arrange
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+            var testDeleteEmployee = SeedTestData.GetTestEmployee();
+            mockRepo.Setup(repo => repo.Employee.GetEmployee(testDeleteEmployee.Id, false))
+                .Returns(testDeleteEmployee);
+            var controller = new EmployeeManagerController(mockRepo.Object) { TempData = tempData};
+            //Act
+            var result = controller.Delete(testDeleteEmployee.Id);
+            //Assert
+            Assert.IsInstanceOf<RedirectToActionResult>(result);
+            var redirectToActionResult = result as RedirectToActionResult;
+            Assert.AreEqual("Index", redirectToActionResult.ActionName);
+            Assert.AreEqual(tempData["Message"], "Werknemer verwijderd");
         }
     }
 }

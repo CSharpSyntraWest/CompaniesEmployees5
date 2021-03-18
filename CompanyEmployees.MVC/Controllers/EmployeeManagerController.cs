@@ -106,7 +106,7 @@ namespace CompanyEmployees.MVC.Controllers
             _repositoryManager.Employee.DeleteEmployee(employeeToDelete);
             _repositoryManager.Save();
             TempData["Message"] = "Werknemer verwijderd";
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");//nameof(Index) = "Index"
         }
 
     }
