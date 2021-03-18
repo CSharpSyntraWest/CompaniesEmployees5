@@ -39,6 +39,8 @@ namespace CompanyEmployees.MVC.Test
             Assert.IsAssignableFrom<List<Employee>>(viewResult.ViewData.Model);
             List<Employee> model = viewResult.ViewData.Model as List<Employee>;
             Assert.AreEqual(2, model.Count());
+            //bv eerste  van de testEmployees testen op Id:
+            Assert.IsTrue(model.Where(emp => emp.Id == SeedTestData.GetTestEmployee().Id).Any());
         }
     }
 }
