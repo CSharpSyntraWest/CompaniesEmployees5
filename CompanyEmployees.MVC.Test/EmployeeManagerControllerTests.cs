@@ -67,5 +67,22 @@ namespace CompanyEmployees.MVC.Test
             Assert.AreEqual(testEmployee.CompanyId, employee.CompanyId);
             Assert.AreEqual(testEmployee.Position, employee.Position);
         }
+        [Test]
+        public void Insert_InsertsEmployeeAndReturnsAViewResult_WithAnEmployee()
+        {
+            //Arrange
+            mockRepo.Setup(repo => repo.Employee.CreateEmployeeForCompany(It.IsAny<Guid>(), It.IsAny<Employee>()))
+                .Verifiable();//om te kunnen testen of de methode CreateEmployeeForCompany wordt aangeroepen
+            var controller = new EmployeeManagerController(mockRepo.Object);
+            var newEmployee = SeedTestData.GetTestEmployee();
+
+            //Act
+            var result = controller.Insert(newEmployee);
+            //Assert
+            Assert.IsInstanceOf<ViewResult>(result);
+            var viewResult = result as ViewResult;
+            Assert.AreEqual(viewResult.Model, newEmployee);
+            mockRepo.Verify();//Hier wordt geverifieerd om de CreateEmployeeForCompany wordt aangeroepen, indien ja, is de test ok
+        }
     }
 }
