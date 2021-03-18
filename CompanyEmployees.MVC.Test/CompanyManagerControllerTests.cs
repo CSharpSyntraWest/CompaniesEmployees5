@@ -116,11 +116,23 @@ namespace CompanyEmployees.MVC.Test
         [Test]
         public void Update_Company_ReturnsViewResult_WithCompany()
         {
-            //Arrange
+            // Arrange 
+            Company companyToUpdate = SeedTestData.GetTestCompany();
+            Guid testCompanyId = companyToUpdate.Id;
+            mockRepo.Setup(repo => repo.Company.GetCompany(testCompanyId, true))
+                .Returns(companyToUpdate);
+            mockRepo.Setup(repo => repo.Save()).Verifiable();
 
+            var controller = new CompanyManagerController(mockRepo.Object);
+            companyToUpdate.Name = "gewijzigde naam";
             //Act
+            var result = controller.Update(companyToUpdate);
 
-            //Assert
+            // Assert
+            Assert.IsInstanceOf<ViewResult>(result);
+            ViewResult viewResult = result as ViewResult;
+            Assert.AreEqual(companyToUpdate, viewResult.Model);
+            mockRepo.Verify();
         }
     }
 }
