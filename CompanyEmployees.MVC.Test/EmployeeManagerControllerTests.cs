@@ -42,5 +42,30 @@ namespace CompanyEmployees.MVC.Test
             //bv eerste  van de testEmployees testen op Id:
             Assert.IsTrue(model.Where(emp => emp.Id == SeedTestData.GetTestEmployee().Id).Any());
         }
+
+        [Test]
+        public void Details_ForEmployeeId_ReturnsEmployee()
+        {
+            //Arrange
+            Employee testEmployee = SeedTestData.GetTestEmployee();
+            Guid testEmployeeId = testEmployee.Id;
+            mockRepo.Setup(e => e.Employee.GetEmployee(testEmployeeId,It.IsAny<bool>())).Returns(testEmployee);
+            EmployeeManagerController controller = new EmployeeManagerController(mockRepo.Object);
+            //Act
+            var result = controller.Details(testEmployeeId);
+            //Assert
+            Assert.IsInstanceOf<ViewResult>(result); //Klassiek assertions model van Nunit: testen op type
+            ViewResult viewResult = result as ViewResult;
+            Assert.That(viewResult.Model, Is.TypeOf<Employee>());//Constraint assertions model van Nunit: testen op type
+            //of: Assert.IsInstanceOf<Employee>(viewResult.Model);     //Klassiek assertions model van Nunit: testen op type
+            Employee employee = (Employee)viewResult.Model; //of casting via 'as' operator: viewResult.Model as Employee
+            Assert.AreEqual(testEmployeeId, employee.Id);
+            //Nog wat extra testjes voor de andere Employee Properties:
+            Assert.AreEqual(testEmployee.Name, employee.Name);
+            Assert.AreEqual(testEmployee.Description, employee.Description);
+            Assert.AreEqual(testEmployee.Age, employee.Age);
+            Assert.AreEqual(testEmployee.CompanyId, employee.CompanyId);
+            Assert.AreEqual(testEmployee.Position, employee.Position);
+        }
     }
 }
